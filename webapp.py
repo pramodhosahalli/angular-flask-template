@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request
 import json
 import random
+import base64
+
 app = Flask(__name__)
 
 imageList = {}
@@ -16,7 +18,16 @@ def getImages():
 @app.route("/uploadImages", methods = ["POST"])
 def uploadImages():
     objectId = str(random.randint(0,10000000))
+    print(request.json)
     imageList[objectId] = request.json
+
+    imageEncodedVersion = request.json["image"].split(",")
+    extension = "png"
+    if "jpeg" in imageEncodedVersion[0]:
+        extension = "jpeg"
+    # Decode the image data and Write Image data to a file 
+    with open("imageToSave"+objectId+"."+extension, "wb") as file:
+        file.write(base64.decodebytes(bytes(imageEncodedVersion[1],"utf-8")))
     return getImages()
 
 @app.route("/deleteImages", methods = ["POST"])
