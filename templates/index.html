@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="exampleApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Image Scanner Application 1.0</title>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+  <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="/static/css/app-template.css">
+</head>
+
+<body ng-controller="tableController">
+  <!-- {% raw %} -->
+  <div class="container" style = "margin-top: 3%; box-shadow: 5px 5px 10px #888888;">
+    <form class="well form-horizontal" ng-submit="uploadImages()" style="border-color:#344234;border-width: 2px;">
+      <fieldset>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Name</label>
+          <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input id="name" ng-model="form.name" placeholder="Full Name" class="form-control" value="" type="text" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Email</label>
+          <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input id="email" ng-model="form.email" placeholder="Email" class="form-control" value="" type="email" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Phone Number</label>
+          <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                <input id="phone" ng-model="form.phone" placeholder="Phone Number" class="form-control" value="" type="number" required>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Upload Image</label>
+          <div class="col-md-8 inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                <input id="image" ng-model="form.image" placeholder="upload Image" class="form-control" value="" type="file" required>
+            </div>
+          </div>
+        </div>
+      <div class="pull-right">
+        <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+        <button type="reset" class="btn btn-danger">Reset</button>     
+      </div>
+    </fieldset>
+    </form>
+  </div>
+
+  <div class="container well" style="box-shadow: 5px 5px 10px #888888;margin-top:3%;">
+    <div class="pull-right">
+    <button class="btn btn-default" ng-show ="!isEditMode" ng-click ="enableEditMode()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>
+    <br/><br/>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Image</th>
+          <th ng-if="isEditMode"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(key,value) in tableContents">
+          <td>{{value.name}}</td>
+          <td>{{value.email}}</td>
+          <td>{{value.phone}}</td>
+          <td>{{value.image}}</td>
+          <td ng-if="isEditMode"><input type="checkbox" name="selectedBoxes[]" ng-model="checkboxList[$index]" 
+          ng-true-value="{{key}}" ng-false-value="-1"/>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pull-right" ng-if="isEditMode">
+      <button class="btn btn-warning" ng-click="deleteImages()"><i class="glyphicon glyphicon-trash"></i>&nbsp;Delete</button>&nbsp;
+      <button class="btn btn-info" ng-click="disableEditMode()">&nbsp;Cancel</button>
+      <br/><br/>
+      </div>  
+  </div>
+
+  <!-- {% endraw %} -->
+  <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+  <script src="static/js/exampleApp.js"></script>
+
+</body>
+</html>
