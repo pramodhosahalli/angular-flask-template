@@ -1,6 +1,25 @@
 //
 var exampleApp = angular.module('exampleApp',[]);
 
+exampleApp.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
+
 exampleApp.service('ajaxService', function ($http,$q) {
     
     this.ajaxHttpGetCall = function (url) {
@@ -38,13 +57,16 @@ exampleApp.controller('tableController', function($scope, ajaxService){
         });
     };
 
+    
     $scope.uploadImages = function(){
+        
         var result = ajaxService.ajaxHttpPostCall("./uploadImages",$scope.form)
         result.then(function(response){
             $scope.form = {} // reset the form contents
             $scope.getImages(); // call get Images to fetch list of updated images
-        });
+        });    
     };
+
 
     //From the Table Contents, get the Objects to be Deleted and Send it to BackEnd..
     $scope.deleteImages = function(){
