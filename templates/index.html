@@ -52,7 +52,7 @@
           <div class="col-md-8 inputGroupContainer">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
-                <input id="image" ng-model="form.image" placeholder="upload Image" class="form-control" value="" type="file" required>
+                <input fileread="form.image" accept="image/*" placeholder="upload Image" class="form-control" type="file" required>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
           <td>{{value.name}}</td>
           <td>{{value.email}}</td>
           <td>{{value.phone}}</td>
-          <td>{{value.image}}</td>
+          <td><image src="{{value.image}}" alt="image Can't be Displayed" width="200px" height="200px"/></td>
           <td ng-if="isEditMode"><input type="checkbox" name="selectedBoxes[]" ng-model="checkboxList[$index]" 
           ng-true-value="{{key}}" ng-false-value="-1"/>
         </tr>
