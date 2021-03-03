@@ -2,6 +2,7 @@ from flask import Flask,render_template,request
 import json
 import random
 import base64
+from detect import ImageProcessor
 
 app = Flask(__name__)
 
@@ -36,6 +37,11 @@ def deleteImages():
         del imageList[objectId]
     return getImages()
 
+
+@app.route("/callScript", methods = ["POST"])
+def callScript():
+    # Image has to be passed... but passing none now
+    return ImageProcessor().detectImageQualities(imageList)
 
 @app.route('/')
 def index():
