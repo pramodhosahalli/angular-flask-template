@@ -67,6 +67,13 @@ exampleApp.controller('tableController', function($scope, ajaxService){
         });    
     };
 
+    $scope.callScript = function(){
+        var result = ajaxService.ajaxHttpPostCall("./callScript")
+        result.then(function(response){
+            console.log(response);
+            $scope.scriptoutput = response.data;
+        }); 
+    };
 
     //From the Table Contents, get the Objects to be Deleted and Send it to BackEnd..
     $scope.deleteImages = function(){
