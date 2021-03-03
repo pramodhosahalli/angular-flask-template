@@ -64,6 +64,14 @@
     </form>
   </div>
 
+  <div>
+    <br/>
+    <button class="btn btn-info" ng-click="callScript()">&nbsp;Call Script</button>
+    <br/><br/>
+    <label ng-bind="scriptoutput"></label>
+  </div>
+
+
   <div class="container well" style="box-shadow: 5px 5px 10px #888888;margin-top:3%;">
     <div class="pull-right">
     <button class="btn btn-default" ng-show ="!isEditMode" ng-click ="enableEditMode()"><i class="glyphicon glyphicon-edit"></i>&nbsp;Edit</button>
